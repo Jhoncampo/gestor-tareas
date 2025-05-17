@@ -126,7 +126,7 @@ class Ventana(tb.Window):
 # Punto de entrada de nuestra aplicación
 def main():
     app=Ventana()
-    app.title("Gestor tareas")
+    app.title("Gestor tareas 2025")
     app.state("zoomed") # Iniciamos la pantalla maximizada
     tb.Style("superhero")
     app.mainloop()
