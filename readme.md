@@ -4,6 +4,8 @@ Aplicación de escritorio desarrollada en **Python** con interfaz gráfica usand
 
 ---
 
+## Pendiente por crear el documento y actualizar el diagrama de flujo
+
 ## 🚀 Funcionalidades clave
 
 ### 🗂 Gestión de tareas
