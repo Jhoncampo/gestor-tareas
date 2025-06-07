@@ -5,7 +5,7 @@ from views.menu import menu_view
 import ttkbootstrap as tb
 from controllers.auth import login
 
-class login_view(ttk.Frame):  # ⬅️ ahora es un Frame, no una ventana
+class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
     def __init__(self, master):
         super().__init__(master)
         self.master = master
