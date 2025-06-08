@@ -9,7 +9,8 @@ class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
     def __init__(self, master):
         super().__init__(master)
         self.master = master
-        self.pack()
+        self.grid(row=0, column=0, sticky="nsew")
+
         self.ventana_login()
 
     def ventana_login(self):
