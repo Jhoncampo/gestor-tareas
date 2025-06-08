@@ -1,4 +1,5 @@
 from db.conexion import conectar_bd  # asegúrate de que el path sea correcto
+from utils.session import obtener_usuario
 
 class UsuariosController:
     def guardar_usuario(self, datos):
@@ -20,7 +21,7 @@ class UsuariosController:
             conexion.close()
 
     
-    def obtener_usuarios():
+    def obtener_usuarios(self):
         try:
             conexion = conectar_bd()
             if conexion is None:
@@ -34,3 +35,23 @@ class UsuariosController:
         except Exception as e:
             print(f"Error al obtener usuarios: {e}")
             return []
+    def obtener_usuario_actual(self):
+          return obtener_usuario()
+
+    def actualizar_perfil_usuario(self, datos):
+        conexion = conectar_bd()
+        if not conexion:
+            return False
+        try:
+            cursor = conexion.cursor()
+            cursor.execute(
+                "UPDATE usuarios SET nombre = %s, clave = %s WHERE id = %s",
+                datos
+            )
+            conexion.commit()
+            return cursor.rowcount > 0
+        except:
+            return False
+        finally:
+            conexion.close()
+

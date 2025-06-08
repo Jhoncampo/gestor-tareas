@@ -6,10 +6,18 @@ def login(usuario, clave):
         return None
     try:
         cursor = conexion.cursor()
-        cursor.execute("SELECT * FROM usuarios WHERE usuario = %s AND clave = %s", (usuario, clave))
-        return cursor.fetchone()
+        cursor.execute("SELECT id, nombre, usuario FROM usuarios WHERE usuario = %s AND clave = %s", (usuario, clave))
+        fila = cursor.fetchone()
+        if fila:
+            return {
+                'id': fila[0],
+                'nombre': fila[1],
+                'usuario': fila[2]
+            }
+        return None
     finally:
         conexion.close()
+
 
 def registrar_usuario(nombre, usuario, clave):
     conexion = conectar_bd()

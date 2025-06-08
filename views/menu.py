@@ -3,6 +3,8 @@ from tkinter import ttk
 from ttkbootstrap import Frame, Label
 from views.lista_usuarios import view_lista_usuarios
 from views.lista_tareas import mostrar_lista_tareas
+from views.perfil import view_perfil_usuario
+
 
 class menu_view:
     def __init__(self, master):
@@ -29,6 +31,15 @@ class menu_view:
 
         btn_usuarios = ttk.Button(self.frame_left, text='Usuarios', width=20, command=self.ventana_lista_usuarios)
         btn_usuarios.grid(row=1, column=0, padx=10, pady=10)
+        
+        btn_perfil = ttk.Button(self.frame_left, text='Perfil', width=20, command=self.ventana_perfil_usuario)
+        btn_perfil.grid(row=2, column=0, padx=10, pady=10)
+
+    def ventana_perfil_usuario(self):
+        for widget in self.frame_right.winfo_children():
+            widget.destroy()
+        view_perfil_usuario(self.frame_right) 
+
 
     def ventana_lista_usuarios(self):
         # Limpia el frame central antes de insertar la nueva vista

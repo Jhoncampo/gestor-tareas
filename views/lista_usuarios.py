@@ -11,8 +11,8 @@ class view_lista_usuarios(tb.Frame):
         super().__init__(master)
         self.master = master
         self.grid(row=0, column=0, sticky=NSEW)  # o .pack()
-        self.mostrar_lista_usuarios()
         self.controller = UsuariosController()
+        self.mostrar_lista_usuarios()
 
     
 
@@ -37,18 +37,17 @@ class view_lista_usuarios(tb.Frame):
         btn_eliminar_usuario=tb.Button(self.lblframe_botones_listausuarios, text='Eliminar usuario', width=18, style='danger')
         btn_eliminar_usuario.grid(row=0,column=2,padx=5,pady=5)
 
-        self.lblframe_tree_listatareas=ttk.LabelFrame(self.frame_lista_usuarios)
-        self.lblframe_tree_listatareas.grid(row=1,column=0,padx=10,pady=10,sticky=NSEW)
+        self.lblframe_tree_listausuarios=ttk.LabelFrame(self.frame_lista_usuarios)
+        self.lblframe_tree_listausuarios.grid(row=1,column=0,padx=10,pady=10,sticky=NSEW)
 
-        columnas=("id","nombre", "usuario", "clave", "rol")
-        self.tree_lista_tareas=tb.Treeview(self.lblframe_tree_listatareas, columns=columnas, height=17, show='headings', style='dark')
-        self.tree_lista_tareas.grid(row=0,column=0)
+        columnas=("id","nombre", "usuario", "rol")
+        self.tree_lista_usuarios=tb.Treeview(self.lblframe_tree_listausuarios, columns=columnas, height=17, show='headings', style='dark')
+        self.tree_lista_usuarios.grid(row=0,column=0)
 
-        self.tree_lista_tareas.heading("id", text="ID", anchor=W)
-        self.tree_lista_tareas.heading("nombre", text="Nombre", anchor=W)
-        self.tree_lista_tareas.heading("usuario", text="Usuario", anchor=W)
-        self.tree_lista_tareas.heading("clave", text="Clave", anchor=W)
-        self.tree_lista_tareas.heading("rol", text="Rol", anchor=W)
+        self.tree_lista_usuarios.heading("id", text="ID", anchor=W)
+        self.tree_lista_usuarios.heading("nombre", text="Nombre", anchor=W)
+        self.tree_lista_usuarios.heading("usuario", text="Usuario", anchor=W)
+        self.tree_lista_usuarios.heading("rol", text="Rol", anchor=W)
 
         self.mostrar_usuarios()
 
@@ -78,21 +77,21 @@ class view_lista_usuarios(tb.Frame):
         self.txt_clave_nuevo_usuario=ttk.Entry(lblframe_nuevo_usuario, width=40)
         self.txt_clave_nuevo_usuario.grid(row=2,column=1,padx=10,pady=10)
 
-        lbl_rol_nuevo_usuario=Label(lblframe_nuevo_usuario, text="Rol")
-        lbl_rol_nuevo_usuario.grid(row=3,column=0,padx=10,pady=10)
-        self.txt_rol_nuevo_usuario=ttk.Combobox(lblframe_nuevo_usuario, width=38, values=("admin", "usuario",), state="readonly")
-        self.txt_rol_nuevo_usuario.grid(row=3,column=1,padx=10,pady=10)
-        self.txt_rol_nuevo_usuario.current(0) # set the default value to "Administrador"
+        # lbl_rol_nuevo_usuario=Label(lblframe_nuevo_usuario, text="Rol")
+        # lbl_rol_nuevo_usuario.grid(row=3,column=0,padx=10,pady=10)
+        # self.txt_rol_nuevo_usuario=ttk.Combobox(lblframe_nuevo_usuario, width=38, values=("admin", "usuario",), state="readonly")
+        # self.txt_rol_nuevo_usuario.grid(row=3,column=1,padx=10,pady=10)
+        # self.txt_rol_nuevo_usuario.current(0) # set the default value to "Administrador"
 
         btn_guardar_nuevo_usuario=ttk.Button(lblframe_nuevo_usuario, text="Guardar", width=38,style='success', command=self.guardar_usuario_desde_vista)
-        btn_guardar_nuevo_usuario.grid(row=4,column=1,padx=10,pady=10)
+        btn_guardar_nuevo_usuario.grid(row=3,column=1,padx=10,pady=10)
 
 
     def guardar_usuario_desde_vista(self):
         if self.txt_user_nuevo_usuario.get() == "" or \
         self.txt_nombre_nuevo_usuario.get() == "" or \
-        self.txt_clave_nuevo_usuario.get() == "" or \
-        self.txt_rol_nuevo_usuario.get() == "":
+        self.txt_clave_nuevo_usuario.get() == "" :
+        # self.txt_rol_nuevo_usuario.get() == "":
             messagebox.showwarning("Guardando usuarios", "Rellene todos los campos")
             return
 
@@ -100,7 +99,7 @@ class view_lista_usuarios(tb.Frame):
             self.txt_user_nuevo_usuario.get(),
             self.txt_nombre_nuevo_usuario.get(),
             self.txt_clave_nuevo_usuario.get(),
-            self.txt_rol_nuevo_usuario.get()
+            # self.txt_rol_nuevo_usuario.get()
         )
 
         resultado = self.controller.guardar_usuario(datos)

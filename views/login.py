@@ -4,6 +4,7 @@ from views.registro import registro_view
 from views.menu import menu_view
 import ttkbootstrap as tb
 from controllers.auth import login
+from utils.session import establecer_usuario
 
 class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
     def __init__(self, master):
@@ -44,6 +45,7 @@ class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
         resultado = login(usuario, clave)
 
         if resultado:
+            establecer_usuario(resultado)  
             self.frame_login.pack_forget()
             self.ventana_menu()
         else:
