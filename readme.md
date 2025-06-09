@@ -1,63 +1,8 @@
 # 📋 Gestor de Tareas en Python (Tkinter + MySQL)
 
 Aplicación de escritorio desarrollada en **Python** con interfaz gráfica usando **Tkinter** y estilos modernos con **ttkbootstrap**, que permite la gestión de tareas para uno o varios usuarios, con control de roles, historial y alertas.
-
 ---
 
-## Pendiente por crear el documento y actualizar el diagrama de flujo
-
-## 🚀 Funcionalidades clave
-
-### 🗂 Gestión de tareas
-- ✅ Crear, editar, eliminar tareas
-- ✅ Filtrar por estado: Pendiente, En progreso, Completado
-- ✅ Establecer prioridad: Alta, Media, Baja
-- ✅ Asignación de responsables
-- ✅ Notas y archivos adjuntos
-- ✅ Comentarios e historial de cambios
-- ✅ Búsqueda por palabra clave o fecha
-
-### ⏰ Automatización
-- ✅ Alertas para tareas próximas a vencer
-- ✅ Tareas recurrentes (diarias, semanales, mensuales)
-- ✅ Progreso por tarea y usuario
-
-### 🔐 Gestión de usuarios y seguridad
-- ✅ Crear, editar, eliminar usuarios
-- ✅ Roles: Administrador / Usuario común
-- ✅ Validación de contraseñas
-- ✅ Recuperación por pregunta secreta
-- ✅ Historial de acceso y acciones
-
-### 📊 Interfaz visual y usabilidad
-- ✅ Modo claro / oscuro (ttkbootstrap)
-- ✅ Dashboard con:
-  - Número de tareas por estado
-  - Gráfico circular por prioridad
-  - Línea temporal de tareas completadas
-- ✅ Animaciones al cambiar de vista
-- ✅ Cabecera con usuario actual, fecha/hora
-- ✅ Panel lateral de tareas urgentes
-- ✅ Barra de progreso por proyecto
-
-### 💾 Base de datos y extras
-- ✅ Separación de tareas por proyectos
-- ✅ Historial de cambios por tarea
-- ✅ Exportar a CSV / PDF
-- ✅ Backup y restauración automática
-- ✅ Soporte multi-idioma (experimental)
-
----
-
-## 🧩 Tecnologías utilizadas
-
-- 🐍 Python 3.10+
-- 🖼 Tkinter + ttkbootstrap
-- 🐬 MySQL (conector `mysql-connector-python`)
-- 📦 pyinstaller (para crear ejecutable)
-- 📧 smtplib (notificaciones por correo - opcional)
-
----
 
 ## 📁 Estructura del proyecto
 
@@ -92,3 +37,13 @@ CREATE TABLE tareas (
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 
+
+## 🧩 Tecnologías utilizadas
+
+- 🐍 Python 3.10+
+- 🖼 Tkinter + ttkbootstrap
+- 🐬 MySQL (conector `mysql-connector-python`)
+- 📦 pyinstaller (para crear ejecutable)
+- 📧 smtplib (notificaciones por correo - opcional)
+
+---
