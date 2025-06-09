@@ -2,13 +2,18 @@ from tkinter import NSEW, NS
 from tkinter import ttk
 from ttkbootstrap import Frame, Label
 from views.lista_usuarios import view_lista_usuarios
-from views.lista_tareas import mostrar_lista_tareas
+from views.lista_tareas import view_lista_tareas
 from views.perfil import view_perfil_usuario
+from utils.session import cerrar_sesion
 
 
-class menu_view:
-    def __init__(self, master):
+class menu_view(Frame):
+    def __init__(self, master, usuario):
+        super().__init__(master)
         self.master = master
+        self.usuario = usuario
+        
+
 
         self.ventana_menu()
 
@@ -16,6 +21,7 @@ class menu_view:
         # Panel izquierdo
         self.frame_left = Frame(self.master, width=200)
         self.frame_left.grid(row=0, column=0, sticky=NS)
+        print(self.usuario)
 
         # Panel central
         self.frame_center = Frame(self.master)
@@ -34,11 +40,14 @@ class menu_view:
         
         btn_perfil = ttk.Button(self.frame_left, text='Perfil', width=20, command=self.ventana_perfil_usuario)
         btn_perfil.grid(row=2, column=0, padx=10, pady=10)
+        btn_salir = ttk.Button(self.frame_left, text='Salir', width=20, command=self.cerrar_sesion)
+        btn_salir.grid(row=3, column=0, padx=10, pady=10)
+
 
     def ventana_perfil_usuario(self):
-        for widget in self.frame_right.winfo_children():
+        for widget in self.frame_center.winfo_children():
             widget.destroy()
-        view_perfil_usuario(self.frame_right) 
+        view_perfil_usuario(self.frame_center) 
 
 
     def ventana_lista_usuarios(self):
@@ -48,8 +57,26 @@ class menu_view:
 
         # Carga la vista de usuarios dentro del frame central
         view_lista_usuarios(self.frame_center)
+    def cerrar_sesion(self):
+        from views.login import login_view  # ✅ Import local para evitar el círculo
+
+        from utils.session import cerrar_sesion
+        cerrar_sesion()
+
+        for widget in self.master.winfo_children():
+            widget.destroy()
+
+        login_view(self.master)
+
 
 
     def ventana_lista_tareas(self):
-        mostrar_lista_tareas(self)
+        from utils.session import obtener_usuario
+        usuario = obtener_usuario()
+
+        for widget in self.frame_center.winfo_children():
+            widget.destroy()
+
+        view_lista_tareas(self.frame_center, usuario['id'])
+
 

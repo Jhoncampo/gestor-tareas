@@ -5,12 +5,18 @@ from views.menu import menu_view
 import ttkbootstrap as tb
 from controllers.auth import login
 from utils.session import establecer_usuario
+from utils.session import obtener_usuario
 
 class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
     def __init__(self, master):
         super().__init__(master)
         self.master = master
         self.grid(row=0, column=0, sticky="nsew")
+        master.grid_rowconfigure(0, weight=1)
+        master.grid_columnconfigure(0, weight=1)
+        # usuario_actual = obtener_usuario()
+        # user_id = usuario_actual['id']  # aquí tienes el 
+        # print(user_id)
 
         self.ventana_login()
 
@@ -47,12 +53,12 @@ class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
         if resultado:
             establecer_usuario(resultado)  
             self.frame_login.pack_forget()
-            self.ventana_menu()
+            self.ventana_menu(resultado)
         else:
             messagebox.showerror("Acceso", "Usuario o clave incorrectos")
 
-    def ventana_menu(self):
-        menu_view(self)
+    def ventana_menu(self, usuario):
+        menu_view(self, usuario) 
 
     def ventana_registro(self):
         registro_view(self)
