@@ -14,9 +14,6 @@ class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
         self.grid(row=0, column=0, sticky="nsew")
         master.grid_rowconfigure(0, weight=1)
         master.grid_columnconfigure(0, weight=1)
-        # usuario_actual = obtener_usuario()
-        # user_id = usuario_actual['id']  # aquí tienes el 
-        # print(user_id)
 
         self.ventana_login()
 

@@ -21,7 +21,6 @@ class menu_view(Frame):
         # Panel izquierdo
         self.frame_left = Frame(self.master, width=200)
         self.frame_left.grid(row=0, column=0, sticky=NS)
-        print(self.usuario)
 
         # Panel central
         self.frame_center = Frame(self.master)
@@ -40,7 +39,7 @@ class menu_view(Frame):
         
         btn_perfil = ttk.Button(self.frame_left, text='Perfil', width=20, command=self.ventana_perfil_usuario)
         btn_perfil.grid(row=2, column=0, padx=10, pady=10)
-        btn_salir = ttk.Button(self.frame_left, text='Salir', width=20, command=self.cerrar_sesion)
+        btn_salir = ttk.Button(self.frame_left, text='Cerrar sesión', width=20, command=self.cerrar_sesion)
         btn_salir.grid(row=3, column=0, padx=10, pady=10)
 
 

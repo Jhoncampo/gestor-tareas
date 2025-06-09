@@ -7,7 +7,7 @@ class TareasController:
             return []
         try:
             cursor = conexion.cursor()
-            cursor.execute("SELECT id, titulo, descripcion, fecha_inicio, fecha_vencimiento FROM tareas WHERE usuario_id = %s", (usuario_id,))
+            cursor.execute("SELECT id, titulo, descripcion, fecha_inicio, fecha_vencimiento FROM tareas WHERE usuario_id = %s order by fecha_vencimiento asc", (usuario_id,))
             return cursor.fetchall()
         finally:
             conexion.close()
