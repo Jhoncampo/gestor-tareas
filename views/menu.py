@@ -34,8 +34,8 @@ class menu_view(Frame):
         btn_tareas = ttk.Button(self.frame_left, text='Tareas', width=20, command=self.ventana_lista_tareas)
         btn_tareas.grid(row=0, column=0, padx=10, pady=10)
 
-        btn_usuarios = ttk.Button(self.frame_left, text='Usuarios', width=20, command=self.ventana_lista_usuarios)
-        btn_usuarios.grid(row=1, column=0, padx=10, pady=10)
+        # btn_usuarios = ttk.Button(self.frame_left, text='Usuarios', width=20, command=self.ventana_lista_usuarios)
+        # btn_usuarios.grid(row=1, column=0, padx=10, pady=10)
         
         btn_perfil = ttk.Button(self.frame_left, text='Perfil', width=20, command=self.ventana_perfil_usuario)
         btn_perfil.grid(row=2, column=0, padx=10, pady=10)

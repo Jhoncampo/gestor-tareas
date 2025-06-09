@@ -153,13 +153,11 @@ class view_lista_tareas(tb.Frame):
     
     def guardar_tarea(self):
         try:
-            # 1. Obtener valores
             titulo = self.txt_titulo.get()
             descripcion = self.txt_descripcion.get()
             fecha_str = f"{self.date_fecha.entry.get().replace('/', '-')} {self.combo_hora.get()}"
 
 
-            # 2. Convertir formato a 'YYYY-MM-DD HH:MM:SS'
             fecha_dt = datetime.strptime(fecha_str, "%d-%m-%Y %H:%M")
             fecha_formateada = fecha_dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -167,7 +165,7 @@ class view_lista_tareas(tb.Frame):
                 titulo,
                 descripcion,
                 fecha_formateada,
-                self.usuario_id  # o el id correspondiente
+                self.usuario_id
             )
 
             if self.controller.guardar_tarea(datos):
@@ -176,30 +174,32 @@ class view_lista_tareas(tb.Frame):
                 self.refrescar_tareas()
             else:
                 messagebox.showerror("Error", "No se pudo guardar la tarea")
-
         except Exception as e:
-            print("Error en guardar_tarea:", e)
             messagebox.showerror("Error", f"No se pudo guardar la tarea: {e}")
 
+
     def actualizar_tarea(self):
-        fecha_str = f"{self.date_fecha.entry.get().replace('/', '-')} {self.combo_hora.get()}"
+        try:
+            fecha_str = f"{self.date_fecha.entry.get()} {self.combo_hora.get()}"
+            fecha_dt = datetime.strptime(fecha_str, "%Y-%m-%d %H:%M")
+            fecha_formateada = fecha_dt.strftime("%Y-%m-%d %H:%M:%S")
 
+            datos = (
+                self.txt_titulo.get(),
+                self.txt_descripcion.get(),
+                fecha_formateada,
+                self.tarea_id
+            )
 
-        # 2. Convertir formato a 'YYYY-MM-DD HH:MM:SS'
-        fecha_dt = datetime.strptime(fecha_str, "%d-%m-%Y %H:%M:%S")
-        fecha_formateada = fecha_dt.strftime("%Y-%m-%d %H:%M:%S")
-        datos = (
-            self.txt_titulo.get(),
-            self.txt_descripcion.get(),
-            fecha_formateada,
-            self.tarea_id
-        )
-        if self.controller.actualizar_tarea(datos):
-            messagebox.showinfo("Éxito", "Tarea actualizada")
-            self.form.destroy()
-            self.refrescar_tareas()
-        else:
-            messagebox.showerror("Error", "No se pudo actualizar")
+            if self.controller.actualizar_tarea(datos):
+                messagebox.showinfo("Éxito", "Tarea actualizada")
+                self.form.destroy()
+                self.refrescar_tareas()
+            else:
+                messagebox.showerror("Error", "No se pudo actualizar")
+        except Exception as e:
+            messagebox.showerror("Error", f"No se pudo actualizar la tarea: {e}")
+
 
     def eliminar_tarea(self):
         seleccion = self.tree_listatareas.selection()
