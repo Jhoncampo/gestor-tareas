@@ -1,15 +1,14 @@
-from db.conexion import conectar_bd  # asegúrate de que el path sea correcto
+from db.conexion import conectar_bd 
 from utils.session import obtener_usuario
 
 class UsuariosController:
     def guardar_usuario(self, datos):
         conexion = conectar_bd()
         if not conexion:
-            return False  # si no se conectó, salimos
+            return False 
 
         try:
             cursor = conexion.cursor()
-            # Aquí no incluimos el ID porque es autoincremental
             sql = "INSERT INTO usuarios (nombre, usuario, clave, rol) VALUES (%s, %s, %s, %s)"
             cursor.execute(sql, datos)
             conexion.commit()
@@ -28,7 +27,7 @@ class UsuariosController:
                 return []
 
             cursor = conexion.cursor()
-            cursor.execute("SELECT id, nombre, usuario, rol FROM usuarios")  # Omitimos la clave por seguridad
+            cursor.execute("SELECT id, nombre, usuario, rol FROM usuarios")  
             datos = cursor.fetchall()
             conexion.close()
             return datos

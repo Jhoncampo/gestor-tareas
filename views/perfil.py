@@ -10,10 +10,10 @@ class view_perfil_usuario(tb.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.master = master
-        self.grid(row=0, column=0, sticky=NSEW)  # o .pack()
+        self.grid(row=0, column=0, sticky=NSEW)  
         self.controller = UsuariosController()
 
-        self.usuario_actual = self.controller.obtener_usuario_actual()  # 🔁 Asegúrate de tener este método
+        self.usuario_actual = self.controller.obtener_usuario_actual() 
         if not self.usuario_actual:
             messagebox.showerror("Error", "No se pudo cargar el perfil del usuario.")
             return

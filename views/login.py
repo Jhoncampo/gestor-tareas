@@ -7,7 +7,7 @@ from controllers.auth import login
 from utils.session import establecer_usuario
 from utils.session import obtener_usuario
 
-class login_view(tb.Frame):  # ⬅️ ahora es un Frame, no una ventana
+class login_view(tb.Frame):  
     def __init__(self, master):
         super().__init__(master)
         self.master = master

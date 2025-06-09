@@ -6,7 +6,6 @@ def main():
     app.title("Gestor de Tareas 2025")
     app.state("zoomed")
 
-    # 🔧 Hacer que la celda 0,0 del grid se expanda
     app.columnconfigure(0, weight=1)
     app.rowconfigure(0, weight=1)
 

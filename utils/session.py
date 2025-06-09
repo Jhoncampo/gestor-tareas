@@ -1,5 +1,3 @@
-# utils/session.py
-
 usuario_actual = None
 
 def establecer_usuario(usuario_dict):

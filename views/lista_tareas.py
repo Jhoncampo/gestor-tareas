@@ -56,7 +56,7 @@ class view_lista_tareas(tb.Frame):
 
         self.txt_busqueda_tarea = ttk.Entry(self.lblframe_busqueda_tareas, width=96)
         self.txt_busqueda_tarea.grid(row=0, column=0, padx=5, pady=5)
-        self.txt_busqueda_tarea.bind('<KeyRelease>', self.buscar_tareas)  # ← Esto es clave
+        self.txt_busqueda_tarea.bind('<KeyRelease>', self.buscar_tareas)
 
 
         # Tabla (labelframe del treeview)
@@ -99,20 +99,18 @@ class view_lista_tareas(tb.Frame):
         self.txt_descripcion = ttk.Entry(self.form, width=40)
         self.txt_descripcion.grid(row=1, column=1, padx=10, pady=10)
 
-        # Etiqueta
+
         Label(self.form, text="Fecha vencimiento").grid(row=2, column=0, padx=10, pady=10)
 
-        # DateEntry (calendario)
         self.date_fecha = DateEntry(self.form, width=20, bootstyle="primary")
         self.date_fecha.grid(row=2, column=1, padx=(10, 0), pady=10, sticky="w")
 
-        # Combobox para seleccionar la hora
         Label(self.form, text="Hora").grid(row=3, column=0, padx=10, pady=10)
 
-        horas = [f"{h:02d}:{m:02d}" for h in range(0, 24) for m in (0, 30)]  # ej. 00:00, 00:30, ..., 23:30
+        horas = [f"{h:02d}:{m:02d}" for h in range(0, 24) for m in (0, 30)] 
         self.combo_hora = ttk.Combobox(self.form, values=horas, width=18)
         self.combo_hora.grid(row=3, column=1, padx=10, pady=10, sticky="w")
-        self.combo_hora.set("08:00")  # valor por defecto
+        self.combo_hora.set("08:00") 
 
 
         if datos:
@@ -135,7 +133,7 @@ class view_lista_tareas(tb.Frame):
         for row in self.tree_listatareas.get_children():
             self.tree_listatareas.delete(row)
 
-        tareas = self.controller.obtener_tareas_por_usuario(self.usuario_id)  # ✅ ahora dinámico
+        tareas = self.controller.obtener_tareas_por_usuario(self.usuario_id)
         for tarea in tareas:
             self.tree_listatareas.insert("", "end", values=tarea)
 
@@ -153,13 +151,11 @@ class view_lista_tareas(tb.Frame):
     
     def guardar_tarea(self):
         try:
-            # 1. Obtener valores
             titulo = self.txt_titulo.get()
             descripcion = self.txt_descripcion.get()
             fecha_str = f"{self.date_fecha.entry.get().replace('/', '-')} {self.combo_hora.get()}"
 
 
-            # 2. Convertir formato a 'YYYY-MM-DD HH:MM:SS'
             fecha_dt = datetime.strptime(fecha_str, "%d-%m-%Y %H:%M")
             fecha_formateada = fecha_dt.strftime("%Y-%m-%d %H:%M:%S")
 
@@ -167,7 +163,7 @@ class view_lista_tareas(tb.Frame):
                 titulo,
                 descripcion,
                 fecha_formateada,
-                self.usuario_id  # o el id correspondiente
+                self.usuario_id 
             )
 
             if self.controller.guardar_tarea(datos):
@@ -185,7 +181,6 @@ class view_lista_tareas(tb.Frame):
         fecha_str = f"{self.date_fecha.entry.get().replace('/', '-')} {self.combo_hora.get()}"
 
 
-        # 2. Convertir formato a 'YYYY-MM-DD HH:MM:SS'
         fecha_dt = datetime.strptime(fecha_str, "%d-%m-%Y %H:%M:%S")
         fecha_formateada = fecha_dt.strftime("%Y-%m-%d %H:%M:%S")
         datos = (
@@ -217,20 +212,16 @@ class view_lista_tareas(tb.Frame):
     def buscar_tareas(self, event=None):
         texto = self.txt_busqueda_tarea.get().lower()
 
-        # Limpia el treeview
         for row in self.tree_listatareas.get_children():
             self.tree_listatareas.delete(row)
 
-        # Obtiene las tareas del usuario actual
         tareas = self.controller.obtener_tareas_por_usuario(self.usuario_id)
 
-        # Filtra las tareas por texto
         tareas_filtradas = [
             tarea for tarea in tareas
             if texto in tarea[0].lower() or texto in tarea[1].lower()
         ]
 
-        # Muestra las tareas filtradas
         for tarea in tareas_filtradas:
             self.tree_listatareas.insert("", "end", values=tarea)
 

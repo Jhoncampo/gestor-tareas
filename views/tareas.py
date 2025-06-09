@@ -27,7 +27,6 @@ class TareasView(Toplevel):
 
         ttk.Button(self, text="Agregar tarea", command=self.agregar_tarea).pack(pady=10)
 
-        # Datos de ejemplo
         self.tareas = []
         self.cargar_tareas_demo()
 
@@ -40,7 +39,6 @@ class TareasView(Toplevel):
             self.tabla.insert("", "end", values=(tarea["id"], tarea["titulo"], tarea["vencimiento"], tarea["estado"]))
 
     def agregar_tarea(self):
-        # Esta función es de ejemplo; luego puedes abrir un formulario real
         nueva_tarea = {
             "id": len(self.tareas) + 1,
             "titulo": f"Tarea {len(self.tareas) + 1}",

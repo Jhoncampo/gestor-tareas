@@ -1,7 +1,7 @@
 
 from tkinter import Frame, LabelFrame, Label, NSEW, NS, messagebox, Toplevel, W, Entry
 from tkinter import ttk
-import ttkbootstrap as tb  # type: ignore
+import ttkbootstrap as tb 
 from utils.frame_center import centrar_ventana
 from controllers.usuarios import UsuariosController
 
@@ -10,7 +10,7 @@ class view_lista_usuarios(tb.Frame):
     def __init__(self, master):
         super().__init__(master)
         self.master = master
-        self.grid(row=0, column=0, sticky=NSEW)  # o .pack()
+        self.grid(row=0, column=0, sticky=NSEW)  
         self.controller = UsuariosController()
         self.mostrar_lista_usuarios()
 
@@ -28,7 +28,7 @@ class view_lista_usuarios(tb.Frame):
             text='Nuevo usuario',
             width=18,
             style='success',
-            command=self.ventana_nuevo_usuario  # ⬅️ ahora llama bien al método
+            command=self.ventana_nuevo_usuario 
         )
 
         btn_nuevo_usuario.grid(row=0,column=0,padx=5,pady=5)
@@ -53,11 +53,11 @@ class view_lista_usuarios(tb.Frame):
 
     def ventana_nuevo_usuario(self):
 
-        self.frame_nuevo_usuario=Toplevel(self.master) # window above the user list
-        self.frame_nuevo_usuario.title("Nuevo usuario") #Title of the window
-        self.center(380,400) # size of the window
-        self.frame_nuevo_usuario.resizable(0,0) # we do not want to resize the window
-        self.frame_nuevo_usuario.grab_set() # so that it does not allow any other accion until the window is closed
+        self.frame_nuevo_usuario=Toplevel(self.master)
+        self.frame_nuevo_usuario.title("Nuevo usuario")
+        self.center(380,400) 
+        self.frame_nuevo_usuario.resizable(0,0) 
+        self.frame_nuevo_usuario.grab_set() 
 
         lblframe_nuevo_usuario=LabelFrame(self.frame_nuevo_usuario)
         lblframe_nuevo_usuario.grid(row=0,column=0,padx=10,pady=10,sticky=NSEW)
@@ -113,12 +113,10 @@ class view_lista_usuarios(tb.Frame):
 
     def mostrar_usuarios(self):
         try:
-            # Limpiar el Treeview
             registros = self.tree_lista_usuarios.get_children()
             for item in registros:
                 self.tree_lista_usuarios.delete(item)
 
-            # Obtener datos desde el controlador
             usuarios = self.controller.obtener_usuarios()
 
             for row in usuarios:
