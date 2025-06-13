@@ -51,17 +51,17 @@ class view_lista_tareas(tb.Frame):
         )
         btn_eliminar_tarea.grid(row=0, column=2, padx=5, pady=5)
 
-        self.lblframe_busqueda_tareas=LabelFrame(self.frame_lista_tareas)
-        self.lblframe_busqueda_tareas.grid(row=1,column=0, padx=10, pady=10,sticky=NSEW)
+        self.lblframe_busqueda_tareas=LabelFrame(self.frame_lista_tareas, text='Buscar por titulo')
+        self.lblframe_busqueda_tareas.grid(row=1,column=0, padx=10, pady=1,sticky=NSEW)
 
         self.txt_busqueda_tarea = ttk.Entry(self.lblframe_busqueda_tareas, width=96)
-        self.txt_busqueda_tarea.grid(row=0, column=0, padx=5, pady=5)
+        self.txt_busqueda_tarea.grid(row=1, column=1, padx=5, pady=5)
         self.txt_busqueda_tarea.bind('<KeyRelease>', self.buscar_tareas)
 
 
         # Tabla (labelframe del treeview)
         self.lblframe_tree_listatareas = ttk.LabelFrame(self.frame_lista_tareas)
-        self.lblframe_tree_listatareas.grid(row=1, column=0, padx=10, pady=10, sticky=NSEW)
+        self.lblframe_tree_listatareas.grid(row=2, column=0, padx=10, pady=10, sticky=NSEW)
 
         columnas = ("id","titulo", "descripcion", "fecha_inicio", "fecha_vencimiento")
         self.tree_listatareas = tb.Treeview(
@@ -110,6 +110,7 @@ class view_lista_tareas(tb.Frame):
         horas = [f"{h:02d}:{m:02d}" for h in range(0, 24) for m in (0, 30)] 
         self.combo_hora = ttk.Combobox(self.form, values=horas, width=18)
         self.combo_hora.grid(row=3, column=1, padx=10, pady=10, sticky="w")
+        self.combo_hora.configure(state='readonly')
         self.combo_hora.set("08:00") 
 
 
@@ -236,7 +237,7 @@ class view_lista_tareas(tb.Frame):
 
         tareas_filtradas = [
             tarea for tarea in tareas
-            if texto in tarea[0].lower() or texto in tarea[1].lower()
+            if texto in tarea[1].lower() or texto in tarea[1].lower()
         ]
 
         for tarea in tareas_filtradas:
