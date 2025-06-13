@@ -24,14 +24,14 @@ class view_lista_tareas(tb.Frame):
         self.lblframe_botones_listatareas = ttk.Labelframe(self.frame_lista_tareas)
         self.lblframe_botones_listatareas.grid(row=0, column=0, padx=10, pady=10, sticky=NSEW)
 
-        btn_nueva_tarea = tb.Button(
+        btn_nueva_tarea = tb.Button( #	Crea un botón y lo guarda en la variable btn_nueva_tarea
             self.lblframe_botones_listatareas,
-            text='Nueva tarea',
-            width=18,
-            style='success',
-            command=self.ventana_nueva_tarea
+            text='Nueva tarea', #Texto que se muestra en el botón
+            width=18, #Ancho del botón (en caracteres, no píxeles)
+            style='success', #Usa el estilo verde tipo Bootstrap (color de éxito) verde
+            command=self.ventana_nueva_tarea #Acción que se ejecuta cuando el usuario hace clic
         )
-        btn_nueva_tarea.grid(row=0, column=0, padx=5, pady=5)
+        btn_nueva_tarea.grid(row=0, column=0, padx=5, pady=5) #fila, columna, horizontal y vertical
 
         btn_editar_tarea = tb.Button(
             self.lblframe_botones_listatareas,

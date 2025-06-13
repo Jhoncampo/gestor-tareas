@@ -1,14 +1,15 @@
-from db.conexion import conectar_bd 
+from db.conexion import conectar_bd  # asegúrate de que el path sea correcto
 from utils.session import obtener_usuario
 
 class UsuariosController:
     def guardar_usuario(self, datos):
         conexion = conectar_bd()
         if not conexion:
-            return False 
+            return False  # si no se conectó, salimos
 
         try:
             cursor = conexion.cursor()
+            # Aquí no incluimos el ID porque es autoincremental
             sql = "INSERT INTO usuarios (nombre, usuario, clave, rol) VALUES (%s, %s, %s, %s)"
             cursor.execute(sql, datos)
             conexion.commit()
@@ -27,8 +28,9 @@ class UsuariosController:
                 return []
 
             cursor = conexion.cursor()
-            cursor.execute("SELECT id, nombre, usuario, rol FROM usuarios")  
-            datos = cursor.fetchall()
+            cursor.execute("SELECT id, nombre, usuario, rol FROM usuarios")  # Omitimos la clave por seguridad
+            datos = cursor.fetchall() #recupera todas las filas y nos devuelve en tuplas
+            #nos guarda en la variable datos todas las filas
             conexion.close()
             return datos
         except Exception as e:
@@ -48,9 +50,9 @@ class UsuariosController:
                 datos
             )
             conexion.commit()
-            return cursor.rowcount > 0
+            return cursor.rowcount > 0 #"Devuelve True si una o más filas fueron afectadas por la consulta SQL, y False si no."
         except:
-            return False
+            return False #"Si ocurre cualquier error, devuelve False.
         finally:
             conexion.close()
 

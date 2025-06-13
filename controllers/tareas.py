@@ -1,10 +1,10 @@
-from db.conexion import conectar_bd
+from db.conexion import conectar_bd #imprtamos la funcion conectar_bd de la base de datos
 
-class TareasController:
-    def obtener_tareas_por_usuario(self, usuario_id):
+class TareasController: #Controla las acciones sobre tareas 
+    def obtener_tareas_por_usuario(self, usuario_id): #que sirve para obtener todas las tareas asociadas a un usuario específico, identificado por su usuario_id
         conexion = conectar_bd()
-        if not conexion:
-            return []
+        if not conexion: #Verifica si la conexión a la base de datos falló.
+            return [] # Devuelve una lista vacía desde una función.
         try:
             cursor = conexion.cursor()
             cursor.execute("SELECT id, titulo, descripcion, fecha_inicio, fecha_vencimiento FROM tareas WHERE usuario_id = %s order by fecha_vencimiento asc", (usuario_id,))
